@@ -1,21 +1,15 @@
-const express = require('express')
-const dotenv = require('dotenv')
-
-dotenv.config()
-
-const app = express()
-app.use(express.json())
+const { Server } = require('./server')
+require('dotenv').config()
 
 try {
-    const APP_PORT = process.env.APP_PORT || false
+  const APP_PORT = process.env.APP_PORT || undefined 
+  
+  if (!APP_PORT) { //valida a porta
+    throw new Error('O arquivo ".env" não está configurado corretamente.');
+  }
 
-    if (!APP_PORT) {
-        throw new Error('As variáveis de ambiente não estão definidas')
-    }
+  new Server(APP_PORT) // sem erros = inicia o servidor
 
-    app.listen(APP_PORT, () => {
-        console.log(`Servidor Online, na porta ${APP_PORT}`)
-    })
 } catch (error) {
-    console.error(error.message)
+  console.error('Erro ao iniciar o servidor: ', error.message)
 }
