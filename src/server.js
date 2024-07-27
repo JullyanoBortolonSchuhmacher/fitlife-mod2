@@ -1,36 +1,26 @@
-const express = require('express')
-const connection = require('./database/connection')
-const APP_PORT = process.env.APP_PORT || false
+const express = require("express")
+const connection = require("./database/connection")
 
 class Server {
-  constructor() {
-    this.server = express()
+  constructor(APP_PORT, servidor= express()) {
+    this.porta = APP_PORT
     this.database()
-    this.iniciarServer()
+    this.iniciarServer(servidor)
   }
-
+  
   async database() {
     try {
       await connection.authenticate()
-      console.log('Conexão com o banco de dados foi bem-sucedida!')
     } catch (error) {
-      console.error('Não foi possível conectar ao banco de dados:', error)
+      console.log("Erro ao conectar ao banco de dados: ", error)
     }
   }
 
-  iniciarServer() {
-    try {
-      if (!APP_PORT) {
-        throw new Error('As variáveis de ambiente não estão definidas')
-      }
-
-      this.server.listen(APP_PORT, () => {
-        console.log(`Servidor Online, na porta ${APP_PORT}`)
-      })
-    } catch (error) {
-      console.error(error.message)
-    }
+  async iniciarServer(servidorAPI) {
+    servidorAPI.listen(this.porta, () => {
+      console.log(`Servidor rodando em https://localhost:${this.porta}`)
+    })
   }
 }
 
-module.exports = new Server()
+module.exports = { Server }
