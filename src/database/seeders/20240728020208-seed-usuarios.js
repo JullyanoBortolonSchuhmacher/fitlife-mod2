@@ -6,7 +6,7 @@ module.exports = {
       {
         nome: 'João Silva',
         sexo: 'Masculino',
-        CPF: '123.456.789-01',
+        cpf: '123.454.789-01',
         endereco: JSON.stringify({
           rua: 'Rua A',
           numero: '123',
@@ -23,7 +23,7 @@ module.exports = {
       {
         nome: 'Maria Souza',
         sexo: 'Feminino',
-        CPF: '987.654.321-00',
+        cpf: '987.622.321-00',
         endereco: JSON.stringify({
           rua: 'Avenida B',
           numero: '456',
