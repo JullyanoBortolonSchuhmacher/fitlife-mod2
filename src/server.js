@@ -1,25 +1,40 @@
-const express = require("express")
-const connection = require("./database/connection")
+const express = require('express')
+const cors = require('cors')
+const connection = require('./database/connection')
+const routes = require('./routes/router')
 
 class Server {
-  constructor(APP_PORT, servidor= express()) {
+  constructor(APP_PORT, servidor = express()) {
     this.porta = APP_PORT
+    this.servidor = servidor
     this.database()
-    this.iniciarServer(servidor)
+    this.configurarMiddlewares()
+    this.iniciarServer()
   }
-  
+
   async database() {
     try {
       await connection.authenticate()
+      console.log('Banco de dados conectado!')
     } catch (error) {
-      console.log("Erro ao conectar ao banco de dados: ", error)
+      console.error('Erro ao conectar ao banco de dados:', error)
     }
   }
 
-  async iniciarServer(servidorAPI) {
-    servidorAPI.listen(this.porta, () => {
-      console.log(`Servidor rodando em https://localhost:${this.porta}`)
-    })
+  configurarMiddlewares() {
+    this.servidor.use(cors())
+    this.servidor.use(express.json())
+    this.servidor.use('/api', routes)
+  }
+
+  iniciarServer() {
+    try {
+      this.servidor.listen(this.porta, () => {
+        console.log(`Rodando em: \n http://localhost:${this.porta}`)
+      });
+    } catch (error) {
+      console.error('Erro ao iniciar servidor:', error)
+    }
   }
 }
 
