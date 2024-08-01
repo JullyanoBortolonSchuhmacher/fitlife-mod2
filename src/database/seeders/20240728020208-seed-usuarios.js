@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -8,12 +8,12 @@ module.exports = {
         sexo: 'Masculino',
         cpf: '123.454.789-01',
         endereco: JSON.stringify({
-          rua: 'Rua A',
+          rua: 'rua alzira aguiar',
           numero: '123',
-          bairro: 'Centro',
-          cidade: 'Cidade X',
-          estado: 'BA',
-          cep: '12345-678'
+          bairro: 'ingleses',
+          cidade: 'florianópolis',
+          estado: 'SC',
+          cep: '88000-000'
         }),
         email: 'joao.silva@exemplo.com',
         senha: '12345678',
@@ -25,12 +25,12 @@ module.exports = {
         sexo: 'Feminino',
         cpf: '987.622.321-00',
         endereco: JSON.stringify({
-          rua: 'Avenida B',
+          rua: 'Avenida Brasil',
           numero: '456',
-          bairro: 'Bairro Z',
-          cidade: 'Cidade Y',
-          estado: 'RR',
-          cep: '87654-321'
+          bairro: 'centro',
+          cidade: 'Florianópolis',
+          estado: 'SC',
+          cep: '88080-030'
         }),
         email: 'maria.souza@exemplo.com',
         senha: 'sucodebanana',
@@ -41,6 +41,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('usuarios', null, {});
+    await queryInterface.bulkDelete('usuarios', null, {})
   }
 };

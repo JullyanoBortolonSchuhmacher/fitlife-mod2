@@ -1,14 +1,7 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const usuarioRoutes = require('./routes/usuario.routes')
+const { Router } = require('express')
+const usuariosRoutes = require('./usuario.routes')
+const routes = new Router()
 
-const app = express()
+routes.use('/usuario', usuariosRoutes)
 
-app.use(bodyParser.json())
-
-app.use('/usuarios', usuarioRoutes)
-
-const PORT = process.env.PORT || false
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`)
-})
+module.exports = routes

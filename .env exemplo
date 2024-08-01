@@ -1,0 +1,11 @@
+APP_PORT=3000
+
+DB_HOST=localhost
+DB_DATABASE=(base_de_dados)
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=(sua_senha)
+DB_DIALECT=postgres
+
+# marcados com () são os que devem ser preenchidos manualmente
+# o restante possuí um padrão no postgres
