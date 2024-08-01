@@ -1,5 +1,6 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize')
 const connection = require('../database/connection')
+const bcrypt = require('bcryptjs')
 
 const Usuario = connection.define('usuarios', {
   nome: {
@@ -37,10 +38,18 @@ const Usuario = connection.define('usuarios', {
     defaultValue: DataTypes.NOW,
   }
 }, {
+  hooks: {
+    beforeSave: async (usuario, options) => {
+      if (usuario.senha && usuario.changed('senha')) {
+        const salt = await bcrypt.genSalt(10)
+        usuario.senha = await bcrypt.hash(usuario.senha, salt)
+      }
+    }
+  },
   timestamps: true,
   createdAt: 'criadoEm',
   updatedAt: false,
-  paranoid: false 
-});
+  paranoid: false
+})
 
 module.exports = Usuario
