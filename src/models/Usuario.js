@@ -49,7 +49,7 @@ const Usuario = connection.define('usuarios', {
   timestamps: true,
   createdAt: 'criadoEm',
   updatedAt: false,
-  paranoid: false
+  paranoid: true
 })
 
 module.exports = Usuario
