@@ -30,7 +30,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
+        unique: true
       },
       senha: {
         type: Sequelize.STRING,
@@ -44,8 +44,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
-      },
-    });
+      }
+    })
   },
 
   async down(queryInterface, Sequelize) {

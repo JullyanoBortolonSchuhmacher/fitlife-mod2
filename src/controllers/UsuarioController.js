@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken')
 
 class UsuarioController {
   async cadastra(req, res) {
-    console.log('Recebendo requisição para criar usuário:', req.body)
     try {
       const dados = req.body
 
@@ -15,10 +14,8 @@ class UsuarioController {
       }
 
       const usuario = await Usuario.create(dados)
-      console.log('Usuário criado com sucesso:', usuario)
       return res.status(201).json(usuario)
     } catch (error) {
-      console.error('Erro ao criar usuário:', error)
       return res.status(500).json({ erro: 'Erro ao criar usuário', error })
     }
   }
@@ -28,7 +25,6 @@ class UsuarioController {
       const usuarios = await Usuario.findAll()
       return res.status(200).json(usuarios)
     } catch (error) {
-      console.error('Erro ao listar usuários:', error)
       return res.status(500).json({ erro: 'Erro ao listar usuários', error })
     }
   }
@@ -42,7 +38,6 @@ class UsuarioController {
       }
       return res.status(200).json(usuario)
     } catch (error) {
-      console.error('Erro ao buscar usuário por ID:', error)
       return res.status(500).json({ erro: 'Erro ao buscar usuário por ID', error })
     }
   }
@@ -57,7 +52,6 @@ class UsuarioController {
       await usuario.destroy()
       return res.status(200).json({ mensagem: 'Usuário deletado com sucesso' })
     } catch (error) {
-      console.error('Erro ao deletar usuário:', error)
       return res.status(500).json({ erro: 'Erro ao deletar usuário', error })
     }
   }
@@ -79,7 +73,6 @@ class UsuarioController {
       const token = jwt.sign({ id: usuario.id, email: usuario.email }, process.env.JWT_SECRET, { expiresIn: '1h' })
       return res.status(200).json({ token })
     } catch (error) {
-      console.error('Erro na autenticação:', error)
       return res.status(500).json({ erro: 'Erro na autenticação', error })
     }
   }
