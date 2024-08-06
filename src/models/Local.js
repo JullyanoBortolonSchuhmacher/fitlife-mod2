@@ -36,7 +36,7 @@ const Local = connection.define('locais', {
   }
 }, {
 
-  timestamps: true,
+  timestamps: false,
   createdAt: 'criadoEm',
   updatedAt: false,
   paranoid: true

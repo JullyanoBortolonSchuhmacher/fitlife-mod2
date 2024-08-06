@@ -37,8 +37,7 @@ module.exports = {
         allowNull: false
       },
       outro: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
       },
       criadoEm: {
         type: Sequelize.DATE,

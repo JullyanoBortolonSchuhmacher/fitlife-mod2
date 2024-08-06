@@ -1,52 +1,47 @@
 const { DataTypes } = require('sequelize')
 const connection = require('../database/connection')
-const bcrypt = require('bcryptjs')
 
 const Usuario = connection.define('usuarios', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   nome: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   sexo: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   cpf: {
     type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
+    allowNull: false
   },
   endereco: {
     type: DataTypes.JSON,
-    allowNull: false,
+    allowNull: false
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: true  // Certifique-se de que a coluna existe
   },
   senha: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   dataNascimento: {
-    type: DataTypes.DATEONLY,
-    allowNull: false,
+    type: DataTypes.DATE,
+    allowNull: false
   },
   criadoEm: {
     type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
+    defaultValue: DataTypes.NOW
   }
 }, {
-  hooks: {
-    beforeSave: async (usuario, options) => {
-      if (usuario.senha && usuario.changed('senha')) {
-        const salt = await bcrypt.genSalt(10)
-        usuario.senha = await bcrypt.hash(usuario.senha, salt)
-      }
-    }
-  },
-  timestamps: true,
+  timestamps: false,
   createdAt: 'criadoEm',
   updatedAt: false,
   paranoid: true
